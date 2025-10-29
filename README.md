@@ -1,5 +1,9 @@
 # ceng-407-408-2025-2026-Helma-AI-HealthMate-AI-Powered-Elderly-Care-Assistant
 
+<p align="center">
+  <img src="Helma-AI-Assets/Helma%20AI%20Logo%20Transparent.png" alt="Helma AI Logo" width="200"/>
+</p>
+
 ## Project Description
 As the global population ages, maintaining the independence, safety, and well-being of elderly individuals has become a growing concern. Many elderly people face challenges in managing their daily routines such as taking medication on time, drinking enough water, and staying physically active. At the same time, family members often struggle to monitor their loved ones’ health and safety effectively.
 
@@ -27,5 +31,10 @@ You can visit the project webpage directly by clicking [here](#).
 ---
 
 ## Advisor
-**Dr. Öğr. Üyesi Serdar ARSLAN**
+**Asst. Prof. Dr. Serdar ARSLAN**
 
+---
+
+<p align="center">
+  <img src="Helma-AI-Assets/Helma%20AI%20Logo.png" alt="Helma AI Banner" width="400"/>
+</p>
