@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=42.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dersgpt-server"
+version = "0.1.0"
+description = "FastAPI backend with MongoDB, authentication, and AI vision capabilities"
+readme = "README.md"
+requires-python = ">=3.8"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+asyncio_mode = "auto"
+asyncio_fixture_loop_scope = "function"
+log_cli = true
+log_cli_level = "INFO"
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "api: API tests"
+] 
