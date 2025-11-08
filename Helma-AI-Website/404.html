@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="title">404 - Sayfa Bulunamadı</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body class="antialiased">
+
+    <main class="min-h-screen flex items-center justify-center text-center px-4 hero-bg">
+        <div>
+            <h1 class="text-8xl md:text-9xl font-extrabold text-blue-500">404</h1>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mt-4" data-lang-key="heading">Sayfa Bulunamadı</h2>
+            <p class="text-lg text-gray-300 mt-6 max-w-md mx-auto" data-lang-key="subheading">
+                Aradığınız sayfa mevcut değil. Ana sayfaya dönerek keşfetmeye devam edebilirsiniz.
+            </p>
+            <a href="/" class="mt-10 inline-block bg-blue-600 text-white font-bold px-8 py-3 rounded-lg text-lg hover:bg-blue-700 transition-transform duration-300 hover:scale-105 shadow-lg shadow-blue-600/30" data-lang-key="button">
+                Ana Sayfaya Dön
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const translations = {
+            tr: {
+                title: "404 - Sayfa Bulunamadı",
+                heading: "Sayfa Bulunamadı",
+                subheading: "Aradığınız sayfa mevcut değil. Ana sayfaya dönerek keşfetmeye devam edebilirsiniz.",
+                button: "Ana Sayfaya Dön"
+            },
+            en: {
+                title: "404 - Page Not Found",
+                heading: "Page Not Found",
+                subheading: "The page you are looking for does not exist. You can return to the homepage to continue exploring.",
+                button: "Return to Homepage"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            if (currentTheme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+
+            const currentLang = localStorage.getItem('lang') || 'tr';
+            document.documentElement.lang = currentLang;
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                const translation = translations[currentLang][key];
+                if (translation) {
+                    if (key === 'title') {
+                        document.title = translation;
+                    } else {
+                        el.innerHTML = translation;
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

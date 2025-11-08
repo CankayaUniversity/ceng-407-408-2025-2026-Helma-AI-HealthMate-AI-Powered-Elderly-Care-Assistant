@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helma AI</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header id="header" class="backdrop-blur-lg fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#home" class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold text-white" data-lang-key="appName">Helma AI</span>
+                    <span class="text-xs font-semibold text-gray-400 mt-2" data-lang-key="appSubtitle">HealthMate</span>
+                </a>
+
+                <div class="flex items-center">
+                    <nav class="hidden md:flex items-center space-x-8">
+                        <a href="#home" class="nav-link" data-lang-key="navHome">Ana Sayfa</a>
+                        <a href="#features" class="nav-link" data-lang-key="navFeatures">Özellikler</a>
+                        <a href="#team" class="nav-link" data-lang-key="navTeam">Ekip</a>
+                        <a href="#contact" class="nav-link" data-lang-key="navContact">İletişim</a>
+                    </nav>
+
+                    <div class="flex items-center ml-8 space-x-4">
+                        <button id="theme-toggle" class="flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-blue-500 translate-y-[1px]">
+                            <span id="theme-icon" class="inline-flex h-5 w-5"></span>
+                        </button>
+                        <button id="lang-toggle" class="text-sm font-semibold text-gray-400 hover:text-blue-500 p-2">TR</button>
+                    </div>
+
+                    <a href="#contact" class="hidden lg:inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg shadow-blue-600/20 ml-6">
+                        <span data-lang-key="navCta">Haberdar Ol</span>
+                        <i data-lucide="bell" class="h-4 w-4"></i>
+                    </a>
+                    
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-300 hover:bg-gray-800 focus:outline-none ml-4">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-black/50 backdrop-blur-xl px-4 pt-2 pb-4 space-y-2 border-t border-gray-800">
+            <a href="#home" class="nav-link block py-2" data-lang-key="navHome">Ana Sayfa</a>
+            <a href="#features" class="nav-link block py-2" data-lang-key="navFeatures">Özellikler</a>
+            <a href="#team" class="nav-link block py-2" data-lang-key="navTeam">Ekip</a>
+            <a href="#contact" class="nav-link block py-2" data-lang-key="navContact">İletişim</a>
+            <a href="#contact" class="block w-full text-center bg-blue-600 text-white font-semibold mt-4 px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors md:hidden inline-flex items-center justify-center gap-2">
+                <span data-lang-key="navCta">Haberdar Ol</span>
+                <i data-lucide="bell" class="h-4 w-4"></i>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative pt-32 pb-20 md:pt-48 md:pb-32 text-center hero-bg overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h1 class="text-[3.375rem] md:text-[5.625rem] font-extrabold text-white leading-tight mb-6" data-lang-key="heroTitle">
+                    Sevdikleriniz İçin
+                    <span class="block text-blue-500 mt-2">Akıllı Sağlık Asistanı</span>
+                </h1>
+                <p class="hero-paragraph text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed" data-lang-key="heroSubtitle">
+                    <span class="block text-balance hero-subtext-primary">Helma AI, yapay zekâ destekli mobil refakatçisi ile yaşlı bireylerin daha güvenli, sağlıklı ve bağımsız bir yaşam sürmesine destek olur.</span>
+                    <span class="block mt-6 text-balance hero-subtext-secondary">Günlük rutinleri hassasiyetle takip eder, ihtiyaç anlarında yakınları bilgilendirir ve <span class="font-semibold text-blue-400">kişiselleştirilmiş önerilerle</span> yaşam kalitesini sürekli iyileştirir.</span>
+                </p>
+                <div class="flex justify-center gap-4">
+                    <a href="#features" class="bg-blue-600 text-white font-bold px-8 py-3 rounded-lg text-lg hover:bg-blue-700 transition-transform duration-300 hover:scale-105 shadow-lg shadow-blue-600/30" data-lang-key="heroCta">
+                        Daha Fazlasını Keşfet
+                    </a>
+                </div>
+            </div>
+            <div class="mt-20 px-4">
+                <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-center items-end gap-4 md:gap-8">
+                    <div class="hero-device md:mb-8 transform transition-transform duration-500 hover:scale-105 hover:-translate-y-2">
+                        <img src="images/screen1.png" alt="Helma AI App Screen 1" class="hero-screen">
+                    </div>
+                    <div class="hero-device transform transition-transform duration-500 hover:scale-105 hover:-translate-y-2 z-10">
+                        <img src="images/screen2.png" alt="Helma AI App Main Screen" class="hero-screen">
+                    </div>
+                    <div class="hero-device md:mb-8 transform transition-transform duration-500 hover:scale-105 hover:-translate-y-2">
+                        <img src="images/screen3.png" alt="Helma AI App Screen 3" class="hero-screen">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 section-glow">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="featuresTitle">Kapsamlı Çözümlerimiz</h2>
+                    <p class="text-lg text-gray-400 max-w-3xl mx-auto mt-4" data-lang-key="featuresSubtitle">
+                        Günlük yaşamı kolaylaştıran, güvenliği artıran ve sosyal bağları güçlendiren yenilikçi özellikler.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="bot" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature1Title">Yapay Zekâ Refakatçisi</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature1Desc">Görüntülü görüşmelerde duygu analizi yaparak kullanıcıların hâlini anlayan, sohbet eden akıllı asistan.</p>
+                    </div>
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="video" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature2Title">Canlı Görüntülü Bağlantı</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature2Desc">Yakınlar ve bakım verenlerle tek dokunuşla HD video aramalarını başlatır, güvenli iletişim sunar.</p>
+                    </div>
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="pill" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature3Title">İlaç &amp; Su Hatırlatıcısı</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature3Desc">Kişiselleştirilmiş saatlerde ilaç ve su uyarıları göndererek sağlıklı rutinlerin devamını destekler.</p>
+                    </div>
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="dumbbell" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature4Title">Egzersiz Önerileri</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature4Desc">Kondisyona uygun günlük hareket ve esneme programlarıyla aktif yaşamı teşvik eder.</p>
+                    </div>
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="cloud-sun" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature5Title">Hava &amp; Haber Panosu</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature5Desc">Güncel hava durumu ve haber özetlerini sade bir akışta sunarak bilgilendirir.</p>
+                    </div>
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="shield-alert" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature6Title">Acil Durum ve Sesli Destek</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature6Desc">Acil durum butonu ve sesli yardım çağrısıyla ihtiyaç anında yakınlara anında bildirim gönderir.</p>
+                    </div>
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="brain" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature7Title">Zihin Egzersizleri</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature7Desc">Günlük bulmacalar, hafıza oyunları ve sohbet görevleriyle bilişsel becerileri canlı tutar.</p>
+                    </div>
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="calendar-clock" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature8Title">Kişisel Rutin Tanıma</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature8Desc">Alışkanlıkları analiz ederek gün içinde en doğru zamanda öneriler ve hatırlatmalar sunar.</p>
+                    </div>
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="line-chart" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature9Title">Haftalık Sağlık Raporları</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature9Desc">Yaşam belirtileri ve aktivite verilerini derleyip aile üyeleriyle paylaşılabilir raporlar üretir.</p>
+                    </div>
+                    <div class="feature-card p-8 rounded-2xl">
+                        <div class="text-blue-500 mb-4"><i data-lucide="smile" class="w-10 h-10"></i></div>
+                        <h3 class="feature-card-title text-xl font-bold text-white mb-3" data-lang-key="feature10Title">Duygu Analizi ile Destek</h3>
+                        <p class="feature-card-desc text-gray-400" data-lang-key="feature10Desc">Konuşma ve yüz ifadelerinden ruh hâlini izleyip pozitif motivasyon mesajları gönderir.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="teamTitle">Proje Ekibi</h2>
+                    <p class="text-lg text-gray-400 max-w-3xl mx-auto mt-4" data-lang-key="teamSubtitle">
+                        Teknolojiyi toplumsal fayda için kullanma vizyonuyla bir araya gelmiş 5 bilgisayar mühendisliği öğrencisi.
+                    </p>
+                </div>
+                <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                    <article class="team-card group flex flex-col items-center text-center p-8 rounded-3xl bg-white/5 border border-white/10 shadow-lg shadow-blue-500/10 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-2 hover:border-blue-500/40">
+                        <img src="images/ulas.jpeg" alt="Ulaş UÇRAK" class="w-28 h-28 rounded-2xl object-cover border-2 border-blue-500 shadow-lg mb-6">
+                        <h4 class="text-xl font-semibold text-white" data-lang-key="teamMember1Name">Ulaş UÇRAK</h4>
+                        <p class="text-blue-400 mt-1 font-medium min-h-[3rem]" data-lang-key="teamMember1Role">Proje Yöneticisi & Yapay Zekâ Geliştiricisi</p>
+                        <p class="text-gray-400 mt-4 text-sm leading-relaxed min-h-[4.5rem]" data-lang-key="teamMember1Desc">
+                            Model geliştirme sürecini yönetir, proje planını takip eder ve ekibi koordine eder.
+                        </p>
+                    </article>
+
+                    <article class="team-card group flex flex-col items-center text-center p-8 rounded-3xl bg-white/5 border border-white/10 shadow-lg shadow-blue-500/10 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-2 hover:border-blue-500/40">
+                        <img src="images/arda.jpeg" alt="Arda YILDIZ" class="w-28 h-28 rounded-2xl object-cover border-2 border-blue-500 shadow-lg mb-6">
+                        <h4 class="text-xl font-semibold text-white" data-lang-key="teamMember2Name">Arda YILDIZ</h4>
+                        <p class="text-blue-400 mt-1 font-medium min-h-[3rem]" data-lang-key="teamMember2Role">Mobil Geliştirici (iOS & Android)</p>
+                        <p class="text-gray-400 mt-4 text-sm leading-relaxed min-h-[4.5rem]" data-lang-key="teamMember2Desc">
+                            Çok platformlu uygulama deneyimini optimize eder, performans ve güvenilirliği sağlar.
+                        </p>
+                    </article>
+
+                    <article class="team-card group flex flex-col items-center text-center p-8 rounded-3xl bg-white/5 border border-white/10 shadow-lg shadow-blue-500/10 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-2 hover:border-blue-500/40">
+                        <img src="images/barkin.jpeg" alt="Barkın SARIKARTAL" class="w-28 h-28 rounded-2xl object-cover border-2 border-blue-500 shadow-lg mb-6">
+                        <h4 class="text-xl font-semibold text-white" data-lang-key="teamMember3Name">Barkın SARIKARTAL</h4>
+                        <p class="text-blue-400 mt-1 font-medium min-h-[3rem]" data-lang-key="teamMember3Role">Araştırma & Entegrasyon Sorumlusu</p>
+                        <p class="text-gray-400 mt-4 text-sm leading-relaxed min-h-[4.5rem]" data-lang-key="teamMember3Desc">
+                            Yeni teknolojileri araştırır, dış servis entegrasyonlarını planlar ve uygular.
+                        </p>
+                    </article>
+
+                    <article class="team-card group flex flex-col items-center text-center p-8 rounded-3xl bg-white/5 border border-white/10 shadow-lg shadow-blue-500/10 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-2 hover:border-blue-500/40">
+                        <img src="images/dogukan.jpeg" alt="Doğukan POYRAZ" class="w-28 h-28 rounded-2xl object-cover border-2 border-blue-500 shadow-lg mb-6">
+                        <h4 class="text-xl font-semibold text-white" data-lang-key="teamMember4Name">Doğukan POYRAZ</h4>
+                        <p class="text-blue-400 mt-1 font-medium min-h-[3rem]" data-lang-key="teamMember4Role">Backend & Veri Tabanı Geliştiricisi</p>
+                        <p class="text-gray-400 mt-4 text-sm leading-relaxed min-h-[4.5rem]" data-lang-key="teamMember4Desc">
+                            Sunucu mimarisini, veri işleme akışını ve güvenli veri depolamayı inşa eder.
+                        </p>
+                    </article>
+
+                    <article class="team-card group flex flex-col items-center text-center p-8 rounded-3xl bg-white/5 border border-white/10 shadow-lg shadow-blue-500/10 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-2 hover:border-blue-500/40">
+                        <img src="images/umut.jpeg" alt="Umut Eray AÇIKGÖZ" class="w-28 h-28 rounded-2xl object-cover border-2 border-blue-500 shadow-lg mb-6">
+                        <h4 class="text-xl font-semibold text-white" data-lang-key="teamMember5Name">Umut Eray AÇIKGÖZ</h4>
+                        <p class="text-blue-400 mt-1 font-medium min-h-[3rem]" data-lang-key="teamMember5Role">Yapay Zekâ Geliştiricisi</p>
+                        <p class="text-gray-400 mt-4 text-sm leading-relaxed min-h-[4.5rem]" data-lang-key="teamMember5Desc">
+                            Geliştirilen modellerin pipeline ve füzyon süreçlerini tasarlar.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 section-glow">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="contactTitle">Gelişmelerden Haberdar Olun!</h2>
+                    <p class="text-lg text-gray-400 mt-4 mb-8 md:whitespace-nowrap" data-lang-key="contactSubtitle">
+                        Helma AI uygulaması yayınlandığında ilk duyan siz olmak için e-posta listemize kaydolun.
+                    </p>
+                    <form id="contact-form" class="mt-8 flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                        <input type="email" id="email-input" name="email" required class="flex-grow w-full px-5 py-3 text-white bg-gray-800/60 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-700 transition-shadow" data-lang-key="emailPlaceholder" placeholder="E-posta adresiniz">
+                        <button type="submit" class="bg-blue-600 text-white font-bold px-8 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg shadow-blue-600/30 whitespace-nowrap" data-lang-key="subscribeButton">
+                            Kaydol
+                        </button>
+                    </form>
+                    <div id="form-message" class="mt-4 font-medium h-6"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black/30 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <div>
+                    <a href="#home" class="text-2xl font-bold text-white" data-lang-key="appName">Helma AI</a>
+                    <p class="text-gray-400 mt-2 max-w-md md:whitespace-nowrap" data-lang-key="footerSlogan">Yaşlı bireylerin yaşam kalitesini teknoloji ile artırıyoruz.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p data-lang-key="footerRights">&copy; 2025 Helma AI. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js?v=6"></script>
+</body>
+</html>
